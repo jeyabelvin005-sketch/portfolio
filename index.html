@@ -34,17 +34,13 @@
         }
 
         html {
-            background: #02040a;
+            background: #01030a;
         }
 
         body {
             font-family: "Poppins", sans-serif;
-            background:
-                radial-gradient(circle at 12% 8%, rgba(0, 219, 222, 0.10), transparent 25%),
-                radial-gradient(circle at 88% 18%, rgba(124, 44, 255, 0.09), transparent 24%),
-                radial-gradient(circle at 50% 100%, rgba(252, 0, 255, 0.06), transparent 30%),
-                #02040a;
-            color: #f7f8ff;
+            color: #ffffff;
+            background: #01030a;
             overflow-x: hidden;
         }
 
@@ -61,339 +57,273 @@
         section {
             padding: 100px 0;
             position: relative;
+            z-index: 2;
         }
 
         .gradient-text {
             background: linear-gradient(
                 90deg,
                 #00dbde,
+                #7b2cff,
                 #fc00ff,
                 #ff8a00
             );
-
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradientText 6s ease infinite;
         }
 
-
-        /* =========================================================
-           ANIMATED BACKGROUND
-        ========================================================== */
-
-        .animated-bg {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: -3;
-            background: #02040a;
-        }
-
-
-        /* Moving grid */
-
-        .bg-grid {
-            position: absolute;
-            inset: -50%;
-            width: 200%;
-            height: 200%;
-
-            background-image:
-                linear-gradient(
-                    rgba(0,219,222,0.035) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(124,44,255,0.035) 1px,
-                    transparent 1px
-                );
-
-            background-size: 70px 70px;
-
-            transform:
-                perspective(600px)
-                rotateX(65deg);
-
-            animation: gridMove 18s linear infinite;
-
-            mask-image: linear-gradient(
-                to bottom,
-                transparent,
-                black 25%,
-                black 75%,
-                transparent
-            );
-        }
-
-        @keyframes gridMove {
-
+        @keyframes gradientText {
             0% {
-                transform:
-                    perspective(600px)
-                    rotateX(65deg)
-                    translateY(0);
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
             }
 
             100% {
-                transform:
-                    perspective(600px)
-                    rotateX(65deg)
-                    translateY(70px);
+                background-position: 0% 50%;
             }
         }
 
 
         /* =========================================================
-           GLOWING ORBS
+           🌧️ RAINY DOT BACKGROUND
         ========================================================== */
 
-        .bg-orb {
+        #rainBackground {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(0, 219, 222, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 30%,
+                    rgba(124, 44, 255, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(252, 0, 255, 0.05),
+                    transparent 35%
+                ),
+                #01030a;
+        }
+
+
+        /* Large atmospheric glow */
+
+        .ambient-glow {
             position: absolute;
+            width: 450px;
+            height: 450px;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.35;
-
-            animation:
-                orbFloat 12s ease-in-out infinite alternate;
+            filter: blur(100px);
+            opacity: 0.12;
+            animation: ambientMove 12s ease-in-out infinite;
         }
 
-        .orb-1 {
-            width: 420px;
-            height: 420px;
-
-            background: rgba(0,219,222,0.18);
-
+        .ambient-one {
+            background: #00dbde;
             top: -150px;
-            left: -120px;
-
-            animation-duration: 14s;
+            left: -100px;
         }
 
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-
-            background: rgba(124,44,255,0.17);
-
+        .ambient-two {
+            background: #7b2cff;
+            top: 25%;
             right: -180px;
-            top: 20%;
-
-            animation-duration: 17s;
             animation-delay: -4s;
         }
 
-        .orb-3 {
-            width: 380px;
-            height: 380px;
-
-            background: rgba(252,0,255,0.12);
-
+        .ambient-three {
+            background: #fc00ff;
+            bottom: -200px;
             left: 35%;
-            bottom: -180px;
-
-            animation-duration: 15s;
-            animation-delay: -7s;
+            animation-delay: -8s;
         }
 
-        @keyframes orbFloat {
+        @keyframes ambientMove {
+
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(80px, 60px) scale(1.15);
+            }
+
+            66% {
+                transform: translate(-60px, 30px) scale(0.9);
+            }
+
+        }
+
+
+        /* Rain container */
+
+        #rain {
+            position: absolute;
+            inset: 0;
+        }
+
+
+        /* Rain dots */
+
+        .rain-dot {
+            position: absolute;
+            top: -30px;
+            border-radius: 50%;
+            background: #00dbde;
+
+            box-shadow:
+                0 0 5px #00dbde,
+                0 0 12px rgba(0, 219, 222, 0.7),
+                0 0 20px rgba(0, 219, 222, 0.35);
+
+            animation:
+                rainFall linear infinite,
+                rainGlow ease-in-out infinite alternate;
+
+            opacity: 0.7;
+        }
+
+
+        .rain-dot.purple {
+            background: #9b5cff;
+
+            box-shadow:
+                0 0 5px #9b5cff,
+                0 0 12px rgba(155, 92, 255, 0.7),
+                0 0 20px rgba(155, 92, 255, 0.35);
+        }
+
+
+        .rain-dot.pink {
+            background: #fc00ff;
+
+            box-shadow:
+                0 0 5px #fc00ff,
+                0 0 12px rgba(252, 0, 255, 0.7),
+                0 0 20px rgba(252, 0, 255, 0.35);
+        }
+
+
+        @keyframes rainFall {
 
             0% {
                 transform:
-                    translate(0,0)
-                    scale(1);
-            }
-
-            50% {
-                transform:
-                    translate(80px,-60px)
-                    scale(1.15);
+                    translate3d(0, -50px, 0)
+                    scale(0.7);
             }
 
             100% {
                 transform:
-                    translate(-50px,80px)
-                    scale(0.95);
+                    translate3d(var(--drift), 115vh, 0)
+                    scale(1);
             }
+
         }
 
 
-        /* =========================================================
-           NEON MOVING LINES
-        ========================================================== */
+        @keyframes rainGlow {
 
-        .glow-line {
+            0% {
+                opacity: 0.25;
+            }
+
+            50% {
+                opacity: 0.9;
+            }
+
+            100% {
+                opacity: 0.35;
+            }
+
+        }
+
+
+        /* Moving horizontal light */
+
+        .light-wave {
             position: absolute;
-
-            width: 2px;
-            height: 70vh;
-
+            width: 150%;
+            height: 2px;
+            left: -25%;
             background: linear-gradient(
-                to bottom,
+                90deg,
                 transparent,
-                #00dbde,
-                #7b2cff,
+                rgba(0, 219, 222, 0.2),
+                rgba(124, 44, 255, 0.25),
+                rgba(252, 0, 255, 0.2),
                 transparent
             );
 
-            opacity: 0.15;
+            filter: blur(2px);
 
-            filter: blur(1px);
+            animation: waveMove 9s linear infinite;
         }
 
-        .line-1 {
-            left: 18%;
-            top: -20%;
-
-            transform: rotate(25deg);
-
-            animation:
-                lineMove1 12s linear infinite;
+        .light-wave:nth-child(1) {
+            top: 25%;
         }
 
-        .line-2 {
-            right: 20%;
-            top: -30%;
-
-            transform: rotate(-25deg);
-
-            animation:
-                lineMove2 16s linear infinite;
+        .light-wave:nth-child(2) {
+            top: 60%;
+            animation-delay: -4s;
         }
 
-        @keyframes lineMove1 {
+        @keyframes waveMove {
 
-            0% {
-                transform:
-                    translateY(-30vh)
-                    rotate(25deg);
+            from {
+                transform: translateX(-15%);
+                opacity: 0;
             }
 
-            100% {
-                transform:
-                    translateY(140vh)
-                    rotate(25deg);
-            }
-        }
-
-        @keyframes lineMove2 {
-
-            0% {
-                transform:
-                    translateY(-40vh)
-                    rotate(-25deg);
+            30% {
+                opacity: 1;
             }
 
-            100% {
-                transform:
-                    translateY(150vh)
-                    rotate(-25deg);
+            70% {
+                opacity: 1;
             }
+
+            to {
+                transform: translateX(15%);
+                opacity: 0;
+            }
+
         }
 
 
-        /* =========================================================
-           AURORA
-        ========================================================== */
+        /* Mouse glow */
 
-        .animated-bg::after {
-            content: "";
-
-            position: absolute;
-            inset: -30%;
-
-            background:
-                radial-gradient(
-                    ellipse at 20% 30%,
-                    rgba(0,219,222,0.06),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    ellipse at 80% 40%,
-                    rgba(124,44,255,0.06),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    ellipse at 50% 90%,
-                    rgba(252,0,255,0.05),
-                    transparent 35%
-                );
-
-            animation:
-                auroraMove 20s ease-in-out infinite alternate;
-        }
-
-        @keyframes auroraMove {
-
-            0% {
-                transform:
-                    translate(-3%, -2%)
-                    scale(1);
-            }
-
-            50% {
-                transform:
-                    translate(4%, 3%)
-                    scale(1.08);
-            }
-
-            100% {
-                transform:
-                    translate(-2%, 5%)
-                    scale(1.02);
-            }
-        }
-
-
-        /* =========================================================
-           PARTICLES
-        ========================================================== */
-
-        #particles {
+        #mouseGlow {
             position: fixed;
-            inset: 0;
-
-            pointer-events: none;
-
-            z-index: -1;
-
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-
-            bottom: -20px;
-
+            width: 350px;
+            height: 350px;
             border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
 
-            background: white;
+            background: radial-gradient(
+                circle,
+                rgba(0, 219, 222, 0.08),
+                rgba(124, 44, 255, 0.035),
+                transparent 70%
+            );
 
-            animation:
-                floatParticle linear infinite,
-                particleGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatParticle {
-
-            from {
-                transform: translateY(0);
-            }
-
-            to {
-                transform: translateY(-110vh);
-            }
-        }
-
-        @keyframes particleGlow {
-
-            from {
-                opacity: 0.2;
-            }
-
-            to {
-                opacity: 0.9;
-            }
+            transform: translate(-50%, -50%);
         }
 
 
@@ -404,15 +334,11 @@
         #loader {
             position: fixed;
             inset: 0;
-
-            background: #02040a;
-
+            background: #01030a;
             display: flex;
             justify-content: center;
             align-items: center;
-
             z-index: 9999;
-
             transition: 0.6s ease;
         }
 
@@ -428,18 +354,14 @@
         .loader-circle {
             width: 70px;
             height: 70px;
-
-            border: 5px solid rgba(255,255,255,0.1);
-
-            border-top: 5px solid #00dbde;
-            border-right: 5px solid #fc00ff;
-
+            border: 5px solid rgba(255,255,255,0.08);
+            border-top-color: #00dbde;
+            border-right-color: #fc00ff;
             border-radius: 50%;
-
-            animation:
-                spin 1s linear infinite;
-
+            animation: spin 1s linear infinite;
             margin: auto;
+            box-shadow:
+                0 0 20px rgba(0,219,222,0.3);
         }
 
         .loader-content h2 {
@@ -462,16 +384,14 @@
             position: fixed;
             top: 0;
             width: 100%;
-
             z-index: 1000;
 
-            background:
-                rgba(2,4,10,0.92);
+            background: rgba(1, 3, 10, 0.82);
 
             backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
 
-            border-bottom:
-                1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
 
             box-shadow:
                 0 10px 35px rgba(0,0,0,0.35);
@@ -479,7 +399,6 @@
 
         nav {
             height: 75px;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -492,19 +411,14 @@
 
         .nav-links {
             display: flex;
-
             list-style: none;
-
             gap: 30px;
         }
 
         .nav-links a {
             font-size: 14px;
-
             color: #d9d9e5;
-
             transition: 0.3s;
-
             position: relative;
         }
 
@@ -515,12 +429,9 @@
 
         .nav-links a::after {
             content: "";
-
             position: absolute;
-
             width: 0;
             height: 2px;
-
             left: 0;
             bottom: -7px;
 
@@ -541,15 +452,10 @@
 
         #menuBtn {
             display: none;
-
             border: none;
-
             background: transparent;
-
             color: white;
-
             font-size: 25px;
-
             cursor: pointer;
         }
 
@@ -560,103 +466,77 @@
 
         .hero {
             min-height: 100vh;
-
             display: flex;
             align-items: center;
-
             padding-top: 100px;
 
             background:
                 linear-gradient(
                     180deg,
-                    rgba(5,8,18,0.20),
-                    rgba(2,4,10,0.72)
+                    rgba(1,3,10,0.15),
+                    rgba(1,3,10,0.4)
                 );
         }
 
         .hero-content {
             display: grid;
-
-            grid-template-columns:
-                1.2fr 0.8fr;
-
+            grid-template-columns: 1.2fr 0.8fr;
             gap: 60px;
-
             align-items: center;
         }
 
         .hero small {
             color: #00dbde;
-
             font-weight: 600;
-
             letter-spacing: 2px;
 
             text-shadow:
-                0 0 18px
-                rgba(0,219,222,0.35);
+                0 0 18px rgba(0,219,222,0.5);
         }
 
         .hero h1 {
-            font-size:
-                clamp(34px, 6vw, 68px);
-
+            font-size: clamp(34px, 6vw, 68px);
             line-height: 1.05;
-
             margin: 15px 0;
-
             font-weight: 800;
-
             white-space: nowrap;
 
             text-shadow:
-                0 8px 35px
-                rgba(0,0,0,0.55);
+                0 8px 35px rgba(0,0,0,0.55);
         }
 
         .hero h2 {
-            font-size:
-                clamp(20px, 3vw, 30px);
-
+            font-size: clamp(20px, 3vw, 30px);
             min-height: 45px;
-
             color: #ddd;
         }
 
         .hero p {
             margin-top: 25px;
-
             max-width: 650px;
-
             color: #b7b9c8;
-
             line-height: 1.8;
         }
 
+
+        /* =========================================================
+           BUTTONS
+        ========================================================== */
+
         .hero-buttons {
             display: flex;
-
             gap: 15px;
-
             margin-top: 35px;
-
             flex-wrap: wrap;
         }
 
         .btn {
-            padding:
-                13px 24px;
-
+            padding: 13px 24px;
             border-radius: 30px;
-
             font-weight: 600;
-
             transition: 0.3s;
-
             display: inline-flex;
-
             gap: 10px;
-
             align-items: center;
         }
 
@@ -665,26 +545,40 @@
                 linear-gradient(
                     90deg,
                     #00dbde,
+                    #7b2cff,
                     #fc00ff
                 );
+
+            background-size: 200% 200%;
+            animation: buttonGradient 4s ease infinite;
+        }
+
+        @keyframes buttonGradient {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
         }
 
         .btn-secondary {
-            border:
-                1px solid
-                rgba(255,255,255,0.2);
-
-            background:
-                rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
         }
 
         .btn:hover {
-            transform:
-                translateY(-4px);
+            transform: translateY(-4px);
 
             box-shadow:
-                0 12px 30px
-                rgba(0,219,222,0.2);
+                0 12px 30px rgba(0,219,222,0.2);
         }
 
 
@@ -695,11 +589,9 @@
         .hero-photo {
             width: 350px;
             height: 350px;
-
             margin: auto;
 
             border-radius: 50%;
-
             padding: 7px;
 
             position: relative;
@@ -708,6 +600,7 @@
                 linear-gradient(
                     135deg,
                     #00dbde,
+                    #7b2cff,
                     #fc00ff,
                     #ff8a00,
                     #00dbde
@@ -716,30 +609,20 @@
             background-size: 300% 300%;
 
             box-shadow:
-                0 0 30px
-                rgba(0,219,222,0.18),
-
-                0 0 75px
-                rgba(124,44,255,0.14),
-
-                0 25px 65px
-                rgba(0,0,0,0.55);
+                0 0 40px rgba(0,219,222,0.25),
+                0 0 80px rgba(252,0,255,0.18);
 
             animation:
                 photoFloat 4s ease-in-out infinite,
                 gradientMove 6s ease infinite;
 
-            transition:
-                transform 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .hero-photo::before {
             content: "";
-
             position: absolute;
-
-            inset: -4px;
-
+            inset: -5px;
             border-radius: 50%;
 
             background:
@@ -755,8 +638,7 @@
                 rotateBorder 5s linear infinite;
 
             z-index: -1;
-
-            filter: blur(4px);
+            filter: blur(5px);
         }
 
         .hero-photo img {
@@ -764,18 +646,13 @@
             height: 100%;
 
             display: block;
-
             object-fit: cover;
-
             object-position: center;
 
             border-radius: 50%;
-
-            border:
-                7px solid #080b18;
+            border: 7px solid #01030a;
 
             position: relative;
-
             z-index: 2;
 
             transition:
@@ -789,7 +666,6 @@
 
         .hero-photo:hover img {
             transform: scale(1.04);
-
             filter: brightness(1.06);
         }
 
@@ -802,6 +678,7 @@
             50% {
                 transform: translateY(-8px);
             }
+
         }
 
         @keyframes gradientMove {
@@ -817,6 +694,7 @@
             100% {
                 background-position: 0% 50%;
             }
+
         }
 
         @keyframes rotateBorder {
@@ -828,6 +706,7 @@
             to {
                 transform: rotate(360deg);
             }
+
         }
 
 
@@ -837,16 +716,16 @@
 
         .section-title {
             text-align: center;
-
             margin-bottom: 55px;
         }
 
         .section-title .icon {
             font-size: 28px;
-
             color: #00dbde;
-
             margin-bottom: 10px;
+
+            text-shadow:
+                0 0 20px rgba(0,219,222,0.6);
         }
 
         .section-title h2 {
@@ -855,7 +734,6 @@
 
         .section-title p {
             color: #999fb5;
-
             margin-top: 10px;
         }
 
@@ -868,51 +746,38 @@
             background:
                 linear-gradient(
                     145deg,
-                    rgba(15,19,32,0.94),
-                    rgba(5,8,16,0.94)
+                    rgba(15,19,32,0.91),
+                    rgba(5,8,16,0.91)
                 );
 
             border:
-                1px solid
-                rgba(255,255,255,0.075);
+                1px solid rgba(255,255,255,0.08);
 
             border-radius: 22px;
 
             padding: 30px;
 
-            backdrop-filter:
-                blur(15px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
 
-            transition: 0.3s;
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
 
             box-shadow:
-                inset 0 1px 0
-                rgba(255,255,255,0.035),
-
-                0 18px 45px
-                rgba(0,0,0,0.28);
+                inset 0 1px 0 rgba(255,255,255,0.03),
+                0 18px 45px rgba(0,0,0,0.28);
         }
 
         .glass-card:hover {
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(18,23,39,0.98),
-                    rgba(6,9,18,0.98)
-                );
-
             border-color:
-                rgba(0,219,222,0.34);
+                rgba(0,219,222,0.35);
 
             box-shadow:
-                0 0 0 1px
-                rgba(0,219,222,0.05),
-
-                0 22px 60px
-                rgba(0,0,0,0.48),
-
-                0 0 35px
-                rgba(0,219,222,0.08);
+                0 0 0 1px rgba(0,219,222,0.05),
+                0 22px 60px rgba(0,0,0,0.48),
+                0 0 35px rgba(0,219,222,0.08);
         }
 
 
@@ -922,28 +787,27 @@
 
         .about-grid {
             display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
+            grid-template-columns: 1fr 1fr;
             gap: 25px;
         }
 
         .about-card h3 {
             margin-bottom: 15px;
-
             font-size: 22px;
+        }
+
+        .about-card h3 i {
+            color: #00dbde;
+            margin-right: 7px;
         }
 
         .about-card p {
             color: #b7b9c8;
-
             line-height: 1.8;
         }
 
         .highlight {
             color: #00dbde;
-
             font-weight: 600;
         }
 
@@ -954,24 +818,21 @@
 
         .experience-card {
             position: relative;
-
             overflow: hidden;
         }
 
         .experience-card::before {
             content: "";
-
             position: absolute;
-
             width: 5px;
             height: 100%;
-
             left: 0;
             top: 0;
 
             background:
                 linear-gradient(
                     #00dbde,
+                    #7b2cff,
                     #fc00ff
                 );
         }
@@ -982,29 +843,23 @@
 
         .experience-role {
             color: #00dbde;
-
             margin: 7px 0;
-
             font-weight: 600;
         }
 
         .experience-date {
             color: #999fb5;
-
             font-size: 14px;
         }
 
         .experience-card ul {
             margin-top: 20px;
-
             padding-left: 20px;
         }
 
         .experience-card li {
             color: #b7b9c8;
-
             margin: 10px 0;
-
             line-height: 1.6;
         }
 
@@ -1015,18 +870,13 @@
 
         .projects-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(3,1fr);
-
+            grid-template-columns: repeat(3,1fr);
             gap: 22px;
         }
 
         .project-card {
             min-height: 330px;
-
             display: flex;
-
             flex-direction: column;
         }
 
@@ -1035,7 +885,6 @@
             height: 60px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -1044,56 +893,44 @@
             background:
                 linear-gradient(
                     135deg,
-                    rgba(0,219,222,0.10),
-                    rgba(252,0,255,0.10)
+                    rgba(0,219,222,0.12),
+                    rgba(252,0,255,0.12)
                 );
 
             color: #00dbde;
-
             font-size: 25px;
-
             margin-bottom: 25px;
 
             box-shadow:
-                inset 0 0 20px
-                rgba(255,255,255,0.025);
+                inset 0 0 20px rgba(255,255,255,0.025);
         }
 
         .project-card h3 {
             font-size: 20px;
-
             margin-bottom: 15px;
         }
 
         .project-card p {
             color: #aeb2c3;
-
             line-height: 1.7;
-
             flex-grow: 1;
         }
 
         .tags {
             display: flex;
-
             flex-wrap: wrap;
-
             gap: 8px;
-
             margin-top: 20px;
         }
 
         .tag {
-            padding:
-                6px 11px;
-
+            padding: 6px 11px;
             border-radius: 20px;
 
             background:
-                rgba(255,255,255,0.07);
+                rgba(255,255,255,0.06);
 
             color: #bfc4d8;
-
             font-size: 11px;
         }
 
@@ -1104,22 +941,15 @@
 
         .skills-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(2,1fr);
-
+            grid-template-columns: repeat(2,1fr);
             gap: 20px;
         }
 
         .skill-group h3 {
             display: flex;
-
             align-items: center;
-
             gap: 10px;
-
             color: #ffffff;
-
             margin-bottom: 18px;
         }
 
@@ -1129,47 +959,33 @@
 
         .skill-list {
             display: flex;
-
             flex-wrap: wrap;
-
             gap: 10px;
         }
 
         .skill {
-            padding:
-                9px 15px;
-
+            padding: 9px 15px;
             border-radius: 20px;
 
             background:
                 rgba(255,255,255,0.035);
 
             border:
-                1px solid
-                rgba(255,255,255,0.075);
+                1px solid rgba(255,255,255,0.08);
 
             color: #c8cad5;
-
             font-size: 13px;
 
             transition: 0.3s;
         }
 
         .skill:hover {
-            transform:
-                translateY(-3px);
-
-            border-color:
-                #00dbde;
-
+            transform: translateY(-3px);
+            border-color: #00dbde;
             color: #ffffff;
 
-            background:
-                rgba(0,219,222,0.07);
-
             box-shadow:
-                0 0 20px
-                rgba(0,219,222,0.10);
+                0 0 20px rgba(0,219,222,0.10);
         }
 
 
@@ -1179,10 +995,7 @@
 
         .education-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(2,1fr);
-
+            grid-template-columns: repeat(2,1fr);
             gap: 25px;
         }
 
@@ -1192,10 +1005,11 @@
 
         .education-icon {
             font-size: 28px;
-
             color: #fc00ff;
-
             margin-bottom: 20px;
+
+            text-shadow:
+                0 0 20px rgba(252,0,255,0.45);
         }
 
         .education-card h3 {
@@ -1204,15 +1018,12 @@
 
         .education-card .degree {
             color: #00dbde;
-
             margin: 8px 0;
-
             font-weight: 600;
         }
 
         .education-card .date {
             color: #8f94a9;
-
             font-size: 14px;
         }
 
@@ -1231,55 +1042,44 @@
 
         .contact-section > .container > p {
             max-width: 650px;
-
-            margin:
-                15px auto 35px;
-
+            margin: 15px auto 35px;
             color: #aeb2c3;
-
             line-height: 1.8;
         }
 
         .contact-buttons {
             display: flex;
-
             justify-content: center;
-
             flex-wrap: wrap;
-
             gap: 12px;
         }
 
         .contact-pill {
             display: inline-flex;
-
             align-items: center;
-
             gap: 10px;
 
-            padding:
-                13px 18px;
-
+            padding: 13px 18px;
             border-radius: 30px;
 
             background:
                 rgba(255,255,255,0.035);
 
             border:
-                1px solid
-                rgba(255,255,255,0.075);
+                1px solid rgba(255,255,255,0.08);
 
             color: #cdd0dd;
 
-            transition: 0.3s;
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                background 0.3s ease;
         }
 
         .contact-pill:hover {
-            transform:
-                translateY(-3px);
+            transform: translateY(-3px);
 
-            border-color:
-                #00dbde;
+            border-color: #00dbde;
 
             color: white;
 
@@ -1287,8 +1087,7 @@
                 rgba(0,219,222,0.065);
 
             box-shadow:
-                0 0 22px
-                rgba(0,219,222,0.10);
+                0 0 22px rgba(0,219,222,0.10);
         }
 
         .contact-pill i {
@@ -1301,19 +1100,23 @@
         ========================================================== */
 
         footer {
+            position: relative;
+            z-index: 2;
+
             padding: 30px 0;
 
             border-top:
-                1px solid
-                rgba(255,255,255,0.07);
+                1px solid rgba(255,255,255,0.08);
 
             text-align: center;
 
             color: #8d91a6;
-
             font-size: 14px;
 
-            background: #02040a;
+            background:
+                rgba(1,3,10,0.85);
+
+            backdrop-filter: blur(10px);
         }
 
         footer span {
@@ -1335,7 +1138,6 @@
             height: 45px;
 
             border-radius: 50%;
-
             border: none;
 
             background:
@@ -1350,7 +1152,6 @@
             cursor: pointer;
 
             opacity: 0;
-
             visibility: hidden;
 
             transition: 0.3s;
@@ -1358,49 +1159,38 @@
             z-index: 1000;
 
             box-shadow:
-                0 0 25px
-                rgba(0,219,222,0.18),
-
-                0 8px 25px
-                rgba(0,0,0,0.4);
+                0 0 25px rgba(0,219,222,0.18),
+                0 8px 25px rgba(0,0,0,0.4);
         }
 
         #topBtn.show {
             opacity: 1;
-
             visibility: visible;
         }
 
 
         /* =========================================================
-           REVEAL
+           REVEAL ANIMATION
         ========================================================== */
 
         .reveal {
             opacity: 0;
-
-            transform:
-                translateY(40px);
-
-            transition:
-                0.8s ease;
+            transform: translateY(40px);
+            transition: 0.8s ease;
         }
 
         .reveal.active {
             opacity: 1;
-
-            transform:
-                translateY(0);
+            transform: translateY(0);
         }
 
 
         /* =========================================================
-           SELECTION + SCROLLBAR
+           SCROLLBAR
         ========================================================== */
 
         ::selection {
             background: #00dbde;
-
             color: #02040a;
         }
 
@@ -1439,7 +1229,6 @@
 
             .hero-content {
                 grid-template-columns: 1fr;
-
                 text-align: center;
             }
 
@@ -1455,7 +1244,6 @@
             .hero-photo {
                 width: 280px;
                 height: 280px;
-
                 order: -1;
             }
 
@@ -1475,36 +1263,33 @@
 
             .nav-links {
                 position: absolute;
-
                 top: 75px;
                 left: 0;
-
                 width: 100%;
 
                 background:
-                    rgba(8,11,24,0.97);
+                    rgba(1,3,10,0.97);
+
+                backdrop-filter: blur(20px);
 
                 flex-direction: column;
-
                 gap: 0;
 
-                padding:
-                    15px 5%;
+                padding: 15px 5%;
 
-                transform:
-                    translateY(-150%);
+                transform: translateY(-150%);
 
                 transition: 0.4s;
             }
 
             .nav-links.show {
-                transform:
-                    translateY(0);
+                transform: translateY(0);
             }
 
             .nav-links li {
                 padding: 13px 0;
             }
+
         }
 
 
@@ -1516,7 +1301,11 @@
 
             .hero h1 {
                 font-size:
-                    clamp(30px, 8.5vw, 45px);
+                    clamp(
+                        30px,
+                        8.5vw,
+                        45px
+                    );
 
                 white-space: nowrap;
             }
@@ -1529,31 +1318,22 @@
                 font-size: 30px;
             }
 
-            .bg-grid {
-                opacity: 0.35;
-
-                background-size:
-                    50px 50px;
-            }
-
-            .bg-orb {
-                filter: blur(60px);
-
-                transform:
-                    scale(0.7);
-            }
-
-            .glow-line {
-                opacity: 0.08;
-            }
-
             .contact-pill {
-                max-width: 100%;
-
-                font-size: 13px;
-
+                width: 100%;
+                justify-content: center;
                 word-break: break-word;
             }
+
+            /* Reduce rain density visually on mobile */
+
+            .ambient-glow {
+                opacity: 0.07;
+            }
+
+            #mouseGlow {
+                display: none;
+            }
+
         }
 
     </style>
@@ -1564,24 +1344,23 @@
 
 
     <!-- =========================================================
-         PREMIUM ANIMATED BACKGROUND
+         🌧️ ANIMATED RAIN BACKGROUND
     ========================================================== -->
 
-    <div class="animated-bg">
+    <div id="rainBackground">
 
-        <div class="bg-orb orb-1"></div>
+        <div class="ambient-glow ambient-one"></div>
+        <div class="ambient-glow ambient-two"></div>
+        <div class="ambient-glow ambient-three"></div>
 
-        <div class="bg-orb orb-2"></div>
+        <div class="light-wave"></div>
+        <div class="light-wave"></div>
 
-        <div class="bg-orb orb-3"></div>
-
-        <div class="bg-grid"></div>
-
-        <div class="glow-line line-1"></div>
-
-        <div class="glow-line line-2"></div>
+        <div id="rain"></div>
 
     </div>
+
+    <div id="mouseGlow"></div>
 
 
     <!-- =========================================================
@@ -1604,13 +1383,6 @@
 
 
     <!-- =========================================================
-         PARTICLES
-    ========================================================== -->
-
-    <div id="particles"></div>
-
-
-    <!-- =========================================================
          NAVBAR
     ========================================================== -->
 
@@ -1620,32 +1392,21 @@
 
             <nav>
 
-                <a
-                    href="#home"
-                    class="logo gradient-text">
-
+                <a href="#home" class="logo gradient-text">
                     Jeya Belvin J
-
                 </a>
 
-
-                <button
-                    id="menuBtn"
-                    aria-label="Open menu">
+                <button id="menuBtn">
 
                     <i class="fa-solid fa-bars"></i>
 
                 </button>
 
 
-                <ul
-                    class="nav-links"
-                    id="navLinks">
+                <ul class="nav-links" id="navLinks">
 
                     <li>
-                        <a
-                            href="#home"
-                            class="active">
+                        <a href="#home" class="active">
                             Home
                         </a>
                     </li>
@@ -1699,9 +1460,7 @@
          HERO
     ========================================================== -->
 
-    <section
-        class="hero"
-        id="home">
+    <section class="hero" id="home">
 
         <div class="container">
 
@@ -1714,11 +1473,9 @@
                         HELLO, I'M
                     </small>
 
-
                     <h1 class="gradient-text">
                         Jeya Belvin J
                     </h1>
-
 
                     <h2>
 
@@ -1730,11 +1487,11 @@
 
                     </h2>
 
-
                     <p>
-                        B.Tech Artificial Intelligence and Data Science student
-                        passionate about Data Science, Machine Learning,
-                        data analysis and creating meaningful insights from data.
+                        B.Tech Artificial Intelligence and Data Science
+                        student passionate about Data Science,
+                        Machine Learning, data analysis and creating
+                        meaningful insights from data.
                     </p>
 
 
@@ -1765,8 +1522,6 @@
 
                 </div>
 
-
-                <!-- PROFILE PHOTO -->
 
                 <div class="hero-photo">
 
@@ -1826,7 +1581,6 @@
 
                     </h3>
 
-
                     <p>
 
                         I am
@@ -1837,24 +1591,23 @@
                         currently pursuing my
 
                         <span class="highlight">
-                            B.Tech in Artificial Intelligence and Data Science
+                            B.Tech in Artificial Intelligence
+                            and Data Science
                         </span>
 
                         at DMI Engineering College.
 
                     </p>
 
-
                     <br>
-
 
                     <p>
 
                         I am interested in Data Science,
-                        Machine Learning, Data Analysis and
-                        Data Visualization. I enjoy working
-                        with datasets and transforming raw data
-                        into meaningful insights.
+                        Machine Learning, Data Analysis
+                        and Data Visualization. I enjoy
+                        working with datasets and transforming
+                        raw data into meaningful insights.
 
                     </p>
 
@@ -1871,18 +1624,15 @@
 
                     </h3>
 
-
                     <p>
 
                         I work with Python, SQL, Pandas,
-                        NumPy, Matplotlib, Seaborn and
-                        Scikit-learn.
+                        NumPy, Matplotlib, Seaborn
+                        and Scikit-learn.
 
                     </p>
 
-
                     <br>
-
 
                     <p>
 
@@ -1923,6 +1673,7 @@
                 <h2>
 
                     My
+
                     <span class="gradient-text">
                         Experience
                     </span>
@@ -1938,20 +1689,14 @@
                     NextGen EduTantr
                 </h3>
 
-
                 <div class="experience-role">
-
                     Data Science Intern
-
                 </div>
-
 
                 <div class="experience-date">
 
                     July 2026 – August 2026
-
                     &nbsp; | &nbsp;
-
                     Remote
 
                 </div>
@@ -1960,40 +1705,30 @@
                 <ul>
 
                     <li>
-
                         Performed data preprocessing,
                         cleaning and exploratory data
                         analysis using Python, Pandas
                         and NumPy.
-
                     </li>
 
-
                     <li>
-
-                        Created data visualizations using
-                        Matplotlib and Seaborn to identify
-                        patterns, trends and relationships.
-
+                        Created data visualizations
+                        using Matplotlib and Seaborn
+                        to identify patterns, trends
+                        and relationships.
                     </li>
 
-
                     <li>
-
                         Applied machine learning algorithms
                         including Linear Regression,
                         Decision Tree, Random Forest,
                         KNN and clustering techniques.
-
                     </li>
 
-
                     <li>
-
                         Evaluated machine learning models
                         and generated data-driven insights
                         from datasets.
-
                     </li>
 
                 </ul>
@@ -2023,7 +1758,6 @@
 
                 </div>
 
-
                 <h2>
 
                     Featured
@@ -2034,12 +1768,9 @@
 
                 </h2>
 
-
                 <p>
-
                     Practical projects in Data Science
                     & Machine Learning
-
                 </p>
 
             </div>
@@ -2047,8 +1778,6 @@
 
             <div class="projects-grid">
 
-
-                <!-- PROJECT 1 -->
 
                 <div class="glass-card project-card">
 
@@ -2058,11 +1787,9 @@
 
                     </div>
 
-
                     <h3>
                         Customer Data Analysis
                     </h3>
-
 
                     <p>
 
@@ -2075,7 +1802,6 @@
                         trends and relationships.
 
                     </p>
-
 
                     <div class="tags">
 
@@ -2104,8 +1830,6 @@
                 </div>
 
 
-                <!-- PROJECT 2 -->
-
                 <div class="glass-card project-card">
 
                     <div class="project-icon">
@@ -2114,24 +1838,20 @@
 
                     </div>
 
-
                     <h3>
                         Machine Learning Prediction
                     </h3>
 
-
                     <p>
 
-                        Developed predictive models
-                        using Linear Regression,
-                        Decision Tree, Random Forest
-                        and KNN algorithms. Performed
-                        model training, testing and
-                        evaluation to compare algorithm
+                        Developed predictive models using
+                        Linear Regression, Decision Tree,
+                        Random Forest and KNN algorithms.
+                        Performed model training, testing
+                        and evaluation to compare algorithm
                         performance.
 
                     </p>
-
 
                     <div class="tags">
 
@@ -2160,8 +1880,6 @@
                 </div>
 
 
-                <!-- PROJECT 3 -->
-
                 <div class="glass-card project-card">
 
                     <div class="project-icon">
@@ -2170,23 +1888,19 @@
 
                     </div>
 
-
                     <h3>
                         Customer Segmentation
                     </h3>
 
-
                     <p>
 
-                        Implemented K-Means and
-                        Hierarchical Clustering to
-                        identify meaningful customer
-                        segments. Analyzed cluster
+                        Implemented K-Means and Hierarchical
+                        Clustering to identify meaningful
+                        customer segments. Analyzed cluster
                         patterns and created visualizations
                         to interpret customer groups.
 
                     </p>
-
 
                     <div class="tags">
 
@@ -2239,7 +1953,6 @@
 
                 </div>
 
-
                 <h2>
 
                     Technical
@@ -2266,7 +1979,6 @@
 
                     </h3>
 
-
                     <div class="skill-list">
 
                         <span class="skill">
@@ -2291,7 +2003,6 @@
                         Data Science
 
                     </h3>
-
 
                     <div class="skill-list">
 
@@ -2325,7 +2036,6 @@
                         Machine Learning
 
                     </h3>
-
 
                     <div class="skill-list">
 
@@ -2372,7 +2082,6 @@
 
                     </h3>
 
-
                     <div class="skill-list">
 
                         <span class="skill">
@@ -2405,7 +2114,6 @@
                         Tools
 
                     </h3>
-
 
                     <div class="skill-list">
 
@@ -2458,7 +2166,6 @@
 
                 </div>
 
-
                 <h2>
 
                     My
@@ -2483,11 +2190,9 @@
 
                     </div>
 
-
                     <h3>
                         DMI Engineering College
                     </h3>
-
 
                     <div class="degree">
 
@@ -2496,17 +2201,11 @@
 
                     </div>
 
-
                     <div class="date">
                         2025 – 2029
                     </div>
 
-
-                    <p
-                        style="
-                        color:#aeb2c3;
-                        margin-top:15px;
-                        ">
+                    <p style="color:#aeb2c3;margin-top:15px;">
 
                         Tamil Nadu, India
 
@@ -2523,7 +2222,6 @@
 
                     </div>
 
-
                     <h3>
 
                         SAV Balakrishna Matric
@@ -2531,13 +2229,11 @@
 
                     </h3>
 
-
                     <div class="degree">
 
                         Higher Secondary Education
 
                     </div>
-
 
                     <div class="date">
 
@@ -2545,12 +2241,7 @@
 
                     </div>
 
-
-                    <p
-                        style="
-                        color:#aeb2c3;
-                        margin-top:15px;
-                        ">
+                    <p style="color:#aeb2c3;margin-top:15px;">
 
                         Tamil Nadu, India
 
@@ -2574,7 +2265,6 @@
         id="contact">
 
         <div class="container">
-
 
             <div class="section-title">
 
@@ -2611,7 +2301,7 @@
             <div class="contact-buttons">
 
 
-                <!-- EMAIL -->
+                <!-- Gmail -->
 
                 <a
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=jeyabelvin005@gmail.com"
@@ -2626,7 +2316,7 @@
                 </a>
 
 
-                <!-- PHONE -->
+                <!-- Phone -->
 
                 <a
                     href="tel:8825461007"
@@ -2639,7 +2329,7 @@
                 </a>
 
 
-                <!-- LINKEDIN -->
+                <!-- LinkedIn -->
 
                 <a
                     href="https://www.linkedin.com/in/jeya-belvin-334281367/"
@@ -2654,7 +2344,7 @@
                 </a>
 
 
-                <!-- GITHUB -->
+                <!-- GitHub -->
 
                 <a
                     href="https://github.com/jeyabelvin005-sketch/"
@@ -2669,7 +2359,7 @@
                 </a>
 
 
-                <!-- LOCATION -->
+                <!-- Location -->
 
                 <span class="contact-pill">
 
@@ -2715,13 +2405,12 @@
 
 
     <!-- =========================================================
-         BACK TO TOP
+         SCROLL TOP
     ========================================================== -->
 
     <button
         id="topBtn"
-        title="Back to top"
-        aria-label="Back to top">
+        title="Back to top">
 
         <i class="fa-solid fa-arrow-up"></i>
 
@@ -2733,6 +2422,118 @@
     ========================================================== -->
 
     <script>
+
+
+        /* =========================================================
+           🌧️ CREATE RAINING DOTS
+        ========================================================== */
+
+        const rain =
+            document.getElementById("rain");
+
+        const dotCount =
+            window.innerWidth < 600 ? 70 : 150;
+
+
+        for (let i = 0; i < dotCount; i++) {
+
+            const dot =
+                document.createElement("span");
+
+            dot.classList.add("rain-dot");
+
+
+            /* Random color */
+
+            const colorRandom =
+                Math.random();
+
+            if (colorRandom > 0.82) {
+
+                dot.classList.add("pink");
+
+            } else if (colorRandom > 0.58) {
+
+                dot.classList.add("purple");
+
+            }
+
+
+            /* Random position */
+
+            dot.style.left =
+                Math.random() * 100 + "%";
+
+
+            /* Random size */
+
+            const size =
+                1 + Math.random() * 4;
+
+            dot.style.width =
+                size + "px";
+
+            dot.style.height =
+                size + "px";
+
+
+            /* Random speed */
+
+            const duration =
+                3 + Math.random() * 8;
+
+            dot.style.animationDuration =
+                duration + "s";
+
+
+            /* Random starting point */
+
+            dot.style.animationDelay =
+                -(Math.random() * duration) + "s";
+
+
+            /* Random horizontal drift */
+
+            const drift =
+                -40 + Math.random() * 80;
+
+            dot.style.setProperty(
+                "--drift",
+                drift + "px"
+            );
+
+
+            /* Random opacity */
+
+            dot.style.opacity =
+                0.2 + Math.random() * 0.7;
+
+
+            rain.appendChild(dot);
+
+        }
+
+
+        /* =========================================================
+           MOUSE GLOW
+        ========================================================== */
+
+        const mouseGlow =
+            document.getElementById("mouseGlow");
+
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseGlow.style.left =
+                    event.clientX + "px";
+
+                mouseGlow.style.top =
+                    event.clientY + "px";
+
+            }
+        );
 
 
         /* =========================================================
@@ -2759,130 +2560,28 @@
 
 
         /* =========================================================
-           PARTICLES
-        ========================================================== */
-
-        const particles =
-            document.getElementById("particles");
-
-
-        const particleColors = [
-
-            "#00dbde",
-            "#7b2cff",
-            "#fc00ff",
-            "#ffffff"
-
-        ];
-
-
-        for (
-            let i = 0;
-            i < 100;
-            i++
-        ) {
-
-            const particle =
-                document.createElement("span");
-
-
-            particle.classList.add(
-                "particle"
-            );
-
-
-            particle.style.left =
-                Math.random() * 100 + "%";
-
-
-            particle.style.animationDuration =
-                (8 + Math.random() * 18) + "s";
-
-
-            particle.style.animationDelay =
-                Math.random() * 10 + "s";
-
-
-            particle.style.opacity =
-                0.15 +
-                Math.random() * 0.6;
-
-
-            const size =
-                1 +
-                Math.random() * 3;
-
-
-            particle.style.width =
-                size + "px";
-
-
-            particle.style.height =
-                size + "px";
-
-
-            const color =
-                particleColors[
-                    Math.floor(
-                        Math.random() *
-                        particleColors.length
-                    )
-                ];
-
-
-            particle.style.background =
-                color;
-
-
-            particle.style.boxShadow =
-                `
-                0 0 6px ${color},
-                0 0 14px ${color}
-                `;
-
-
-            particles.appendChild(
-                particle
-            );
-
-        }
-
-
-        /* =========================================================
            MOBILE MENU
         ========================================================== */
 
         const menuBtn =
-            document.getElementById(
-                "menuBtn"
-            );
-
+            document.getElementById("menuBtn");
 
         const navLinks =
-            document.getElementById(
-                "navLinks"
-            );
+            document.getElementById("navLinks");
 
 
         menuBtn.addEventListener(
             "click",
             () => {
 
-                navLinks.classList.toggle(
-                    "show"
-                );
-
+                navLinks.classList.toggle("show");
 
                 const icon =
-                    menuBtn.querySelector(
-                        "i"
-                    );
+                    menuBtn.querySelector("i");
 
 
                 if (
-                    navLinks.classList.contains(
-                        "show"
-                    )
+                    navLinks.classList.contains("show")
                 ) {
 
                     icon.classList.remove(
@@ -2914,9 +2613,7 @@
         ========================================================== */
 
         document
-            .querySelectorAll(
-                ".nav-links a"
-            )
+            .querySelectorAll(".nav-links a")
             .forEach(
                 link => {
 
@@ -2926,16 +2623,12 @@
 
                             navLinks
                                 .classList
-                                .remove(
-                                    "show"
-                                );
+                                .remove("show");
 
 
                             const icon =
                                 menuBtn
-                                    .querySelector(
-                                        "i"
-                                    );
+                                    .querySelector("i");
 
 
                             icon.classList.remove(
@@ -2958,9 +2651,7 @@
         ========================================================== */
 
         const revealElements =
-            document.querySelectorAll(
-                ".reveal"
-            );
+            document.querySelectorAll(".reveal");
 
 
         const revealObserver =
@@ -2977,9 +2668,7 @@
 
                                 entry.target
                                     .classList
-                                    .add(
-                                        "active"
-                                    );
+                                    .add("active");
 
                             }
 
@@ -3015,7 +2704,6 @@
                 "section[id]"
             );
 
-
         const navItems =
             document.querySelectorAll(
                 ".nav-links a"
@@ -3033,8 +2721,7 @@
                     section => {
 
                         const sectionTop =
-                            section.offsetTop -
-                            120;
+                            section.offsetTop - 120;
 
 
                         if (
@@ -3082,7 +2769,7 @@
 
 
         /* =========================================================
-           BACK TO TOP
+           SCROLL TOP
         ========================================================== */
 
         const topBtn =
@@ -3136,9 +2823,7 @@
         ========================================================== */
 
         document
-            .querySelectorAll(
-                ".glass-card"
-            )
+            .querySelectorAll(".glass-card")
             .forEach(
                 card => {
 
@@ -3148,11 +2833,8 @@
                         e => {
 
                             if (
-                                window.innerWidth <
-                                900
-                            ) {
-                                return;
-                            }
+                                window.innerWidth < 900
+                            ) return;
 
 
                             const rect =
@@ -3170,28 +2852,22 @@
 
 
                             const rotateX =
-                                (
-                                    (y /
-                                        rect.height)
-                                    - .5
-                                ) * -4;
+                                ((y /
+                                    rect.height) -
+                                    .5) * -4;
 
 
                             const rotateY =
-                                (
-                                    (x /
-                                        rect.width)
-                                    - .5
-                                ) * 4;
+                                ((x /
+                                    rect.width) -
+                                    .5) * 4;
 
 
                             card.style.transform =
-                                `
-                                perspective(900px)
-                                rotateX(${rotateX}deg)
-                                rotateY(${rotateY}deg)
-                                translateY(-4px)
-                                `;
+                                `perspective(900px)
+                                 rotateX(${rotateX}deg)
+                                 rotateY(${rotateY}deg)
+                                 translateY(-4px)`;
 
                         }
                     );
@@ -3274,12 +2950,10 @@
 
                 deleting = true;
 
-
                 setTimeout(
                     typeRole,
                     1500
                 );
-
 
                 return;
 
@@ -3292,7 +2966,6 @@
             ) {
 
                 deleting = false;
-
 
                 roleIndex =
                     (
