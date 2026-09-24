@@ -22,8 +22,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
 
-</head>
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -887,50 +885,93 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(3,1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 22px;
         }
 
         .project-card {
-            min-height: 330px;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
+            min-height: 330px;
         }
 
-        .project-icon {
-            width: 60px;
-            height: 60px;
+        .project-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 14px;
+            margin-bottom: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,219,222,0.08),
+                    rgba(124,44,255,0.08),
+                    rgba(252,0,255,0.06)
+                );
+
+            border: 1px solid rgba(255,255,255,0.06);
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            border-radius: 16px;
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease;
+        }
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(0,219,222,0.12),
-                    rgba(252,0,255,0.12)
-                );
+        .project-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            transition: transform 0.5s ease;
+        }
 
-            color: #00dbde;
-            font-size: 25px;
-            margin-bottom: 25px;
+        .thumb-placeholder {
+            font-size: 48px;
+            color: rgba(0,219,222,0.45);
+            text-shadow:
+                0 0 30px rgba(0,219,222,0.25),
+                0 0 60px rgba(124,44,255,0.15);
+            transition: color 0.3s ease;
+        }
 
+        .project-card:hover .project-thumb {
+            transform: scale(1.02);
             box-shadow:
-                inset 0 0 20px rgba(255,255,255,0.025);
+                0 0 30px rgba(0,219,222,0.12),
+                0 0 60px rgba(124,44,255,0.08);
         }
 
-        .project-card h3 {
+        .project-card:hover .project-thumb img {
+            transform: scale(1.06);
+        }
+
+        .project-card:hover .thumb-placeholder {
+            color: #00dbde;
+        }
+
+        .project-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-body h3 {
             font-size: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
-        .project-card p {
+        .project-body p {
             color: #aeb2c3;
             line-height: 1.7;
             flex-grow: 1;
+            font-size: 14px;
         }
 
         .tags {
@@ -1349,6 +1390,14 @@
 
             #mouseGlow {
                 display: none;
+            }
+
+            .project-thumb {
+                aspect-ratio: 4 / 3;
+            }
+
+            .thumb-placeholder {
+                font-size: 36px;
             }
 
         }
@@ -1795,155 +1844,128 @@
 
             <div class="projects-grid">
 
-
-                <div class="glass-card project-card">
-
-                    <div class="project-icon">
-
-                        <i class="fa-solid fa-chart-line"></i>
-
+                <!-- Project 1: Customer Data Analysis -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="glass-card project-card">
+                    <div class="project-thumb">
+                        <div class="thumb-placeholder">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
                     </div>
-
-                    <h3>
-                        Customer Data Analysis
-                    </h3>
-
-                    <p>
-
-                        Performed data cleaning,
-                        preprocessing and exploratory
-                        data analysis using Python,
-                        Pandas and NumPy. Created
-                        visualizations using Matplotlib
-                        and Seaborn to identify patterns,
-                        trends and relationships.
-
-                    </p>
-
-                    <div class="tags">
-
-                        <span class="tag">
-                            Python
-                        </span>
-
-                        <span class="tag">
-                            Pandas
-                        </span>
-
-                        <span class="tag">
-                            NumPy
-                        </span>
-
-                        <span class="tag">
-                            EDA
-                        </span>
-
-                        <span class="tag">
-                            Seaborn
-                        </span>
-
+                    <div class="project-body">
+                        <h3>Customer Data Analysis</h3>
+                        <p>
+                            Performed data cleaning, preprocessing and exploratory
+                            data analysis using Python, Pandas and NumPy. Created
+                            visualizations using Matplotlib and Seaborn to identify
+                            patterns, trends and relationships.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">NumPy</span>
+                            <span class="tag">EDA</span>
+                            <span class="tag">Seaborn</span>
+                        </div>
                     </div>
+                </a>
 
-                </div>
-
-
-                <div class="glass-card project-card">
-
-                    <div class="project-icon">
-
-                        <i class="fa-solid fa-brain"></i>
-
+                <!-- Project 2: Machine Learning Prediction -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="glass-card project-card">
+                    <div class="project-thumb">
+                        <div class="thumb-placeholder">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
                     </div>
-
-                    <h3>
-                        Machine Learning Prediction
-                    </h3>
-
-                    <p>
-
-                        Developed predictive models using
-                        Linear Regression, Decision Tree,
-                        Random Forest and KNN algorithms.
-                        Performed model training, testing
-                        and evaluation to compare algorithm
-                        performance.
-
-                    </p>
-
-                    <div class="tags">
-
-                        <span class="tag">
-                            Scikit-learn
-                        </span>
-
-                        <span class="tag">
-                            Linear Regression
-                        </span>
-
-                        <span class="tag">
-                            Decision Tree
-                        </span>
-
-                        <span class="tag">
-                            Random Forest
-                        </span>
-
-                        <span class="tag">
-                            KNN
-                        </span>
-
+                    <div class="project-body">
+                        <h3>Machine Learning Prediction</h3>
+                        <p>
+                            Developed predictive models using Linear Regression,
+                            Decision Tree, Random Forest and KNN algorithms.
+                            Performed model training, testing and evaluation to
+                            compare algorithm performance.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">Scikit-learn</span>
+                            <span class="tag">Linear Regression</span>
+                            <span class="tag">Decision Tree</span>
+                            <span class="tag">Random Forest</span>
+                            <span class="tag">KNN</span>
+                        </div>
                     </div>
+                </a>
 
-                </div>
-
-
-                <div class="glass-card project-card">
-
-                    <div class="project-icon">
-
-                        <i class="fa-solid fa-users"></i>
-
+                <!-- Project 3: Customer Segmentation -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="glass-card project-card">
+                    <div class="project-thumb">
+                        <div class="thumb-placeholder">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
                     </div>
-
-                    <h3>
-                        Customer Segmentation
-                    </h3>
-
-                    <p>
-
-                        Implemented K-Means and Hierarchical
-                        Clustering to identify meaningful
-                        customer segments. Analyzed cluster
-                        patterns and created visualizations
-                        to interpret customer groups.
-
-                    </p>
-
-                    <div class="tags">
-
-                        <span class="tag">
-                            K-Means
-                        </span>
-
-                        <span class="tag">
-                            Hierarchical
-                        </span>
-
-                        <span class="tag">
-                            Clustering
-                        </span>
-
-                        <span class="tag">
-                            Python
-                        </span>
-
-                        <span class="tag">
-                            Visualization
-                        </span>
-
+                    <div class="project-body">
+                        <h3>Customer Segmentation</h3>
+                        <p>
+                            Implemented K-Means and Hierarchical Clustering to
+                            identify meaningful customer segments. Analyzed cluster
+                            patterns and created visualizations to interpret
+                            customer groups.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">K-Means</span>
+                            <span class="tag">Hierarchical</span>
+                            <span class="tag">Clustering</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Visualization</span>
+                        </div>
                     </div>
+                </a>
 
-                </div>
+                <!-- Project 4: Personal Portfolio (NEW) -->
+                <a href="https://portfolio-seven-amber-73.vercel.app/" target="_blank" rel="noopener noreferrer" class="glass-card project-card">
+                    <div class="project-thumb">
+                        <div class="thumb-placeholder">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>Personal Portfolio</h3>
+                        <p>
+                            A modern, responsive personal portfolio website built
+                            to showcase skills, projects and experience with a
+                            clean UI and smooth animations. Deployed on Vercel
+                            with a fully responsive layout.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Vercel</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 5: To-Do List App (NEW) -->
+                <a href="https://todo-list-steel-theta-90.vercel.app/" target="_blank" rel="noopener noreferrer" class="glass-card project-card">
+                    <div class="project-thumb">
+                        <div class="thumb-placeholder">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>To-Do List App</h3>
+                        <p>
+                            A clean and responsive task management application
+                            with add, edit, delete and completion tracking
+                            features. Built with modern web technologies and
+                            deployed live on Vercel.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Vercel</span>
+                        </div>
+                    </div>
+                </a>
 
             </div>
 
