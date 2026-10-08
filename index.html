@@ -1543,14 +1543,9 @@
                         Jeya Belvin J
                     </h1>
 
+                    <!-- UPDATED: Static text instead of moving animation -->
                     <h2>
-
-                        <span id="typing"></span>
-
-                        <span class="gradient-text">
-                            |
-                        </span>
-
+                        AI & Data Science Student
                     </h2>
 
                     <p>
@@ -2858,114 +2853,6 @@
 
                 }
             );
-
-
-        /* =========================================================
-           TYPING EFFECT
-        ========================================================== */
-
-        const roles = [
-
-            "AI & Data Science Student",
-
-            "Data Science Enthusiast",
-
-            "Machine Learning Learner",
-
-            "Python Developer",
-
-            "Data Analyst"
-
-        ];
-
-
-        const typing =
-            document.getElementById(
-                "typing"
-            );
-
-
-        let roleIndex = 0;
-
-        let charIndex = 0;
-
-        let deleting = false;
-
-
-        function typeRole() {
-
-            const currentRole =
-                roles[roleIndex];
-
-
-            if (!deleting) {
-
-                charIndex++;
-
-            } else {
-
-                charIndex--;
-
-            }
-
-
-            typing.textContent =
-                currentRole.substring(
-                    0,
-                    charIndex
-                );
-
-
-            if (
-                charIndex ===
-                currentRole.length
-            ) {
-
-                deleting = true;
-
-                setTimeout(
-                    typeRole,
-                    1500
-                );
-
-                return;
-
-            }
-
-
-            if (
-                charIndex === 0 &&
-                deleting
-            ) {
-
-                deleting = false;
-
-                roleIndex =
-                    (
-                        roleIndex + 1
-                    ) %
-                    roles.length;
-
-            }
-
-
-            setTimeout(
-
-                typeRole,
-
-                deleting
-                    ? 45
-                    : 75
-
-            );
-
-        }
-
-
-        setTimeout(
-            typeRole,
-            1600
-        );
 
 
     </script>
