@@ -994,6 +994,37 @@
 
 
         /* =========================================================
+           PROJECT GITHUB LINK
+        ========================================================== */
+
+        .project-github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #bfc4d8;
+            font-size: 13px;
+            transition: 0.3s;
+            align-self: flex-start;
+        }
+
+        .project-github-link:hover {
+            border-color: #00dbde;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 18px rgba(0, 219, 222, 0.1);
+        }
+
+        .project-github-link i {
+            color: #00dbde;
+        }
+
+
+        /* =========================================================
            SKILLS
         ========================================================== */
 
@@ -1895,6 +1926,68 @@
                         </div>
                     </div>
                 </a>
+
+                <!-- Project 3: ReVibe (Pre-loved Marketplace) -->
+                <div class="glass-card project-card">
+
+                    <a href="https://revibe-kqww.onrender.com"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       style="display:flex; flex-direction:column; flex-grow:1; color:inherit;">
+
+                        <div class="project-thumb">
+
+                            <img src="https://image.thum.io/get/width/1200/crop/800/https://revibe-kqww.onrender.com"
+                                 alt="ReVibe Preview"
+                                 onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+                            <div class="thumb-placeholder" style="display:none;">
+                                <i class="fa-solid fa-store"></i>
+                            </div>
+
+                        </div>
+
+                        <div class="project-body">
+
+                            <h3>ReVibe (Pre-loved Marketplace)</h3>
+
+                            <p>
+                                A full-stack MERN application (MongoDB, Express,
+                                Vanilla JS) where users can buy and sell used
+                                products. Features a custom admin panel, user
+                                authentication (admin key), multi-image uploads
+                                via Cloudinary, Razorpay payment gateway
+                                integration, and a mobile-first PWA design.
+                            </p>
+
+                            <div class="tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Express.js</span>
+                                <span class="tag">MongoDB</span>
+                                <span class="tag">Cloudinary</span>
+                                <span class="tag">Razorpay</span>
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                    <!-- GitHub link - separate from main card link -->
+                    <a href="https://github.com/jeyabelvin005-sketch/revibe"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="project-github-link">
+
+                        <i class="fa-brands fa-github"></i>
+
+                        View on GitHub
+
+                    </a>
+
+                </div>
 
             </div>
 
