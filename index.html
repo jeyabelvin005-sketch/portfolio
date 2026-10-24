@@ -1993,7 +1993,7 @@
 
         </div>
 
-                        <!-- Project 4: NYC Taxi Trips ELT Pipeline -->
+                                        <!-- Project 4: NYC Taxi Trips ELT Pipeline -->
                 <div class="glass-card project-card">
 
                     <a href="https://github.com/jeyabelvin005-sketch/taxi-pipeline"
@@ -2001,10 +2001,11 @@
                        rel="noopener noreferrer"
                        style="display:flex; flex-direction:column; flex-grow:1; color:inherit;">
 
-                        <div class="project-thumb">
-
-                            <!-- Using your local dashboard image -->
-                            <img src="dashboard.PNG"
+                        <div class="project-thumb" style="background: rgba(5,8,16,0.9);">
+                            
+                            <!-- object-fit: contain means full image will show without cropping -->
+                            <img src="dashboard.PNG" 
+                                 style="object-fit: contain; object-position: center; padding: 5px;"
                                  alt="NYC Taxi Pipeline Dashboard"
                                  onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
 
@@ -2019,10 +2020,10 @@
                             <h3>NYC Taxi Trips ELT Pipeline</h3>
 
                             <p>
-                                An end-to-end data pipeline processing 3M+ NYC taxi trips
-                                and live weather data. Transforms raw data into a tested
-                                star schema using dbt and serves insights via a Metabase
-                                dashboard. Built with Docker for containerization.
+                                An end-to-end data engineering pipeline processing 3M+ 
+                                NYC taxi trips. Features Python ingestion, dbt star schema 
+                                modeling, data quality testing, and a Metabase dashboard 
+                                to analyze trip patterns and weather impact.
                             </p>
 
                             <div class="tags">
